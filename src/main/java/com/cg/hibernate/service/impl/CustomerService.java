@@ -42,4 +42,19 @@ public class CustomerService extends ICustomerService {
     public List<Customer> findByName(String name) {
         return null;
     }
+
+    @Override
+    public List<Customer> m1(String name, String address) {
+        return iCustomerRepository.demoQueryNative("%" + name + "%", "%" + address + "%");
+    }
+
+    @Override
+    public void m2(String address) {
+        iCustomerRepository.demoQueryNative1(address);
+    }
+
+    @Override
+    public void m3() {
+        iCustomerRepository.demoQueryNative2();
+    }
 }

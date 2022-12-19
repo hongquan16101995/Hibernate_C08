@@ -1,18 +1,23 @@
 package com.cg.hibernate.model;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
-@Table(name = "users")
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    @Column(name = "dc")
     private String address;
+
+//    @ManyToOne(targetEntity = City.class)
+//    private City city;
 
     public Long getId() {
         return id;
@@ -37,4 +42,12 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+//    public City getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(City city) {
+//        this.city = city;
+//    }
 }
