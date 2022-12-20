@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -16,8 +17,9 @@ public class Customer {
     private String name;
     private String address;
 
-//    @ManyToOne(targetEntity = City.class)
-//    private City city;
+    @ManyToOne(targetEntity = City.class)
+    @JoinColumn(name = "city")
+    private City city;
 
     public Long getId() {
         return id;
@@ -43,11 +45,20 @@ public class Customer {
         this.address = address;
     }
 
-//    public City getCity() {
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+
+//    public List<City> getCity() {
 //        return city;
 //    }
 //
-//    public void setCity(City city) {
+//    public void setCity(List<City> city) {
 //        this.city = city;
 //    }
 }

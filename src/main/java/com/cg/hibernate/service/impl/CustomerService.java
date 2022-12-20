@@ -25,7 +25,7 @@ public class CustomerService extends ICustomerService {
 
     @Override
     public Customer findOne(Long id) {
-        return null;
+        return iCustomerRepository.findById(id).get();
     }
 
     @Override

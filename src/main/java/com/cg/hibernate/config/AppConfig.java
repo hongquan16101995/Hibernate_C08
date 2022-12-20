@@ -1,10 +1,19 @@
 package com.cg.hibernate.config;
 
+import com.cg.hibernate.formatter.CityFormatter;
+import com.cg.hibernate.formatter.CustomerFormatter;
+import com.cg.hibernate.service.impl.CustomerService;
+import com.cg.hibernate.service.interface_service.ICityService;
+import com.cg.hibernate.service.interface_service.ICustomerService;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -33,7 +42,13 @@ import java.util.Properties;
 //API: Application Programming Interface
 @EnableJpaRepositories("com.cg.hibernate.repository")
 @EnableTransactionManagement
-public class AppConfig implements WebMvcConfigurer {
+public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
+    private ApplicationContext applicationContext;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -86,7 +101,7 @@ public class AppConfig implements WebMvcConfigurer {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         //chú ý thay đổi tên của DB tương ứng với dự án
-        dataSource.setUrl("jdbc:mysql://localhost:3306/hibernate_c08");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/hibernate_c08?useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
@@ -96,7 +111,7 @@ public class AppConfig implements WebMvcConfigurer {
     public Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         return properties;
     }
 
@@ -106,5 +121,11 @@ public class AppConfig implements WebMvcConfigurer {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry formatterRegistry) {
+        formatterRegistry.addFormatter(new CustomerFormatter(applicationContext.getBean(ICustomerService.class)));
+        formatterRegistry.addFormatter(new CityFormatter(applicationContext.getBean(ICityService.class)));
     }
 }

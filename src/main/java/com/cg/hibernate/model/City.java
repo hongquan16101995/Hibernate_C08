@@ -12,9 +12,6 @@ public class City {
     private String name;
     private String country;
 
-    @OneToMany
-    private List<Customer> customers;
-
     public Long getId() {
         return id;
     }
