@@ -1,7 +1,6 @@
 package com.cg.hibernate.service.impl;
 
 import com.cg.hibernate.model.Customer;
-import com.cg.hibernate.repository.CustomerRepository;
 import com.cg.hibernate.repository.jpa.ICustomerRepository;
 import com.cg.hibernate.service.interface_service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

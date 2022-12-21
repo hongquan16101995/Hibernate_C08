@@ -1,11 +1,6 @@
 package com.cg.hibernate.model;
 
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -52,13 +47,4 @@ public class Customer {
     public void setCity(City city) {
         this.city = city;
     }
-
-
-//    public List<City> getCity() {
-//        return city;
-//    }
-//
-//    public void setCity(List<City> city) {
-//        this.city = city;
-//    }
 }

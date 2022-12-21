@@ -2,9 +2,7 @@ package com.cg.hibernate.formatter;
 
 import com.cg.hibernate.model.Customer;
 import com.cg.hibernate.service.interface_service.ICustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
-import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Locale;

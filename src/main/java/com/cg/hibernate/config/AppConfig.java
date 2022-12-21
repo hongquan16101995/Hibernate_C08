@@ -2,7 +2,6 @@ package com.cg.hibernate.config;
 
 import com.cg.hibernate.formatter.CityFormatter;
 import com.cg.hibernate.formatter.CustomerFormatter;
-import com.cg.hibernate.service.impl.CustomerService;
 import com.cg.hibernate.service.interface_service.ICityService;
 import com.cg.hibernate.service.interface_service.ICustomerService;
 import org.springframework.beans.BeansException;
